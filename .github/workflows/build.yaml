@@ -1,0 +1,29 @@
+name: Production
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  production:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          ref: main
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: osirisguitar
+          password: ${{ secrets.DOCKER_HUB_TOKEN }}
+
+      - name: Build and push to Docker Hub
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          push: true
+          tags: osirisguitar/food-app:latest

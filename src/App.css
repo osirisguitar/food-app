@@ -1,0 +1,398 @@
+/* ═══════════════════════════════════════════════════
+   PAGE
+═══════════════════════════════════════════════════ */
+.page {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 0 1rem 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+/* ═══════════════════════════════════════════════════
+   BOOK HEADER
+═══════════════════════════════════════════════════ */
+.book-header {
+  width: 100%;
+  text-align: center;
+  padding: 2.5rem 1rem 0;
+}
+
+.header-ornament {
+  font-size: 0.75rem;
+  letter-spacing: 0.5em;
+  color: #C4956A;
+  margin-bottom: 0.6rem;
+}
+
+.book-series {
+  font-family: "Lato", sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #8B5E3C;
+  margin-bottom: 0.5rem;
+}
+
+.book-title {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(2rem, 7vw, 3rem);
+  font-weight: 900;
+  color: #2C1A0E;
+  line-height: 1.1;
+  margin-bottom: 0.6rem;
+}
+
+.book-subtitle {
+  font-family: "Playfair Display", Georgia, serif;
+  font-style: italic;
+  font-size: clamp(0.9rem, 2.5vw, 1.05rem);
+  color: #6B4226;
+  margin-bottom: 1.2rem;
+}
+
+.header-rule {
+  height: 1px;
+  background: linear-gradient(to right, transparent, #C4956A 30%, #8B5E3C 50%, #C4956A 70%, transparent);
+  margin: 0 auto;
+  max-width: 420px;
+  position: relative;
+}
+
+.header-rule::after {
+  content: "✦";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  background: #FDF8F0;
+  padding: 0 0.5rem;
+  color: #C4956A;
+  font-size: 0.65rem;
+}
+
+/* ═══════════════════════════════════════════════════
+   EFFORT FILTER
+═══════════════════════════════════════════════════ */
+.effort-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.effort-heading {
+  font-family: "Lato", sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #8B5E3C;
+}
+
+.effort-pills {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.effort-pill {
+  padding: 0.45rem 1.1rem;
+  font-family: "Lato", sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #5A3A20;
+  background: #F0E5D4;
+  border: 1.5px solid #C4956A;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s, border-color 0.15s, transform 0.1s;
+  min-height: 42px;
+  min-width: 60px;
+  user-select: none;
+}
+
+.effort-pill:hover:not(.active) {
+  background: #E8D5BC;
+  border-color: #8B5E3C;
+}
+
+.effort-pill:active {
+  transform: scale(0.96);
+}
+
+/* Active state: "Alla" uses dark neutral */
+.effort-pill.active {
+  color: #FDF8F0;
+  background: #6A4A2A;
+  border-color: #6A4A2A;
+}
+
+/* Active state: per-level accent colors */
+.effort-pill--låg.active {
+  background: #4E7A52;
+  border-color: #4E7A52;
+  color: #fff;
+}
+
+.effort-pill--mellan.active {
+  background: #C27B42;
+  border-color: #C27B42;
+  color: #fff;
+}
+
+.effort-pill--hög.active {
+  background: #8B3A3A;
+  border-color: #8B3A3A;
+  color: #fff;
+}
+
+/* ═══════════════════════════════════════════════════
+   WHEEL SECTION
+═══════════════════════════════════════════════════ */
+.wheel-section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.wheel-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.6rem;
+  width: 100%;
+}
+
+.wheel-frame {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  /* Subtle parchment shadow behind the wheel */
+  filter: drop-shadow(0 6px 24px rgba(44, 26, 14, 0.18));
+}
+
+.wheel-svg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ═══════════════════════════════════════════════════
+   SPIN BUTTON
+═══════════════════════════════════════════════════ */
+.spin-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 2.8rem;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(1rem, 3vw, 1.15rem);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #FDF8F0;
+  background: #8B3A3A;
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  /* Book-style bevelled shadow */
+  box-shadow:
+    0 1px 0 #C4956A inset,
+    0 -1px 0 rgba(0,0,0,0.3) inset,
+    0 4px 14px rgba(139, 58, 58, 0.35);
+  transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.15s;
+  /* Minimum tap target */
+  min-height: 52px;
+  min-width: 180px;
+  user-select: none;
+}
+
+.spin-btn:hover:not(:disabled) {
+  background: #A04040;
+  transform: translateY(-1px);
+  box-shadow:
+    0 1px 0 #C4956A inset,
+    0 -1px 0 rgba(0,0,0,0.3) inset,
+    0 6px 20px rgba(139, 58, 58, 0.45);
+}
+
+.spin-btn:active:not(:disabled) {
+  transform: translateY(1px);
+  box-shadow:
+    0 1px 0 #C4956A inset,
+    0 -1px 0 rgba(0,0,0,0.3) inset,
+    0 2px 6px rgba(139, 58, 58, 0.3);
+}
+
+.spin-btn:disabled,
+.spin-btn.spinning {
+  background: #7A6050;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Animated dots while spinning */
+.spin-dots {
+  display: inline-block;
+  width: 18px;
+  overflow: hidden;
+}
+
+/* ═══════════════════════════════════════════════════
+   RECIPE CARD
+═══════════════════════════════════════════════════ */
+.recipe-card {
+  width: 100%;
+  background: #FFFDF7;
+  border: 1px solid #D4B896;
+  border-radius: 2px;
+  /* Ruled-paper top stripe */
+  border-top: 4px solid #8B3A3A;
+  box-shadow:
+    0 2px 0 #D4B896,
+    0 4px 20px rgba(44, 26, 14, 0.1),
+    /* Paper stack effect */
+    4px 4px 0 #EFE5D5,
+    6px 6px 0 #E5D8C4;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.45s ease, transform 0.45s ease;
+  pointer-events: none;
+  /* Ensure card never collapses to nothing while hidden */
+  min-height: 0;
+}
+
+.recipe-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+
+.recipe-card-top {
+  padding: 0.9rem 1.4rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.recipe-category,
+.recipe-effort-badge {
+  font-family: "Lato", sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #fff;
+  padding: 0.25rem 0.75rem;
+  border-radius: 2px;
+  display: inline-block;
+}
+
+.recipe-card-body {
+  padding: 0.8rem 1.4rem 1rem;
+  border-bottom: 1px solid #E8D8C0;
+}
+
+.recipe-eyebrow {
+  font-family: "Lato", sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #8B5E3C;
+  margin-bottom: 0.35rem;
+}
+
+.recipe-title {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(1.4rem, 5vw, 2rem);
+  font-weight: 700;
+  color: #2C1A0E;
+  line-height: 1.2;
+  margin-bottom: 0.9rem;
+}
+
+.recipe-ingredients {
+  padding-top: 0.7rem;
+  border-top: 1px dashed #D4B896;
+}
+
+.ingredients-heading {
+  font-family: "Lato", sans-serif;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #8B5E3C;
+  margin-bottom: 0.3rem;
+}
+
+.ingredients-list {
+  font-family: "Lato", sans-serif;
+  font-size: 0.92rem;
+  color: #4A3020;
+  line-height: 1.6;
+}
+
+.recipe-card-footer {
+  padding: 0.7rem 1.4rem 0.9rem;
+  text-align: center;
+}
+
+.spin-again-hint {
+  font-family: "Playfair Display", Georgia, serif;
+  font-style: italic;
+  font-size: 0.88rem;
+  color: #9A7050;
+}
+
+/* ═══════════════════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════════════════ */
+.book-footer {
+  padding-top: 0.5rem;
+}
+
+.footer-ornament {
+  font-size: 0.75rem;
+  letter-spacing: 0.4em;
+  color: #C4956A;
+}
+
+/* ═══════════════════════════════════════════════════
+   MOBILE — tighten spacing and scale down gaps
+═══════════════════════════════════════════════════ */
+@media (max-width: 480px) {
+  .page {
+    gap: 1.4rem;
+  }
+
+  .book-header {
+    padding-top: 1.6rem;
+  }
+
+  .wheel-frame {
+    max-width: 100%;
+  }
+
+  .spin-btn {
+    padding: 0.9rem 2.2rem;
+    width: 100%;
+    max-width: 320px;
+    justify-content: center;
+  }
+
+  .recipe-card-top,
+  .recipe-card-body,
+  .recipe-card-footer {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
