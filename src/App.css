@@ -182,6 +182,11 @@
   width: 100%;
   height: auto;
   display: block;
+  outline: none;
+}
+
+.wheel-svg--clickable {
+  cursor: pointer;
 }
 
 /* ═══════════════════════════════════════════════════

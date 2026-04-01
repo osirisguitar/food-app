@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import SpinWheel from "./components/SpinWheel";
-import { categoryColors, effortColors } from "./data/dishes";
+import { categoryColors, effortColors, fetchDishes } from "./data/dishes";
 import "./App.css";
 
 const EFFORT_LEVELS = ["Låg", "Mellan", "Hög"];
@@ -12,11 +12,19 @@ const effortLabels = {
 };
 
 export default function App() {
+  const [dishes, setDishes] = useState([]);
+  const [loadError, setLoadError] = useState(null);
   const [result, setResult] = useState(null);
   const [isSpinning, setIsSpinning] = useState(false);
   const [visible, setVisible] = useState(false);
   const [effortFilter, setEffortFilter] = useState(null); // null = Alla
   const resultRef = useRef(null);
+
+  useEffect(() => {
+    fetchDishes()
+      .then(setDishes)
+      .catch(() => setLoadError("Kunde inte ladda maträtter. Försök igen senare."));
+  }, []);
 
   useEffect(() => {
     if (!visible || isSpinning) return;
@@ -78,12 +86,17 @@ export default function App() {
       </section>
 
       <section className="wheel-section">
-        <SpinWheel
-          onResult={handleResult}
-          isSpinning={isSpinning}
-          setIsSpinning={handleSpinStart}
-          effortFilter={effortFilter}
-        />
+        {loadError ? (
+          <p className="load-error">{loadError}</p>
+        ) : (
+          <SpinWheel
+            dishes={dishes}
+            onResult={handleResult}
+            isSpinning={isSpinning}
+            setIsSpinning={handleSpinStart}
+            effortFilter={effortFilter}
+          />
+        )}
       </section>
 
       <section

@@ -1,5 +1,5 @@
-import { useState, useRef, useEffect } from "react";
-import dishes, { categoryColors, categories } from "../data/dishes";
+import { useState, useRef, useEffect, useMemo } from "react";
+import { categoryColors } from "../data/dishes";
 
 const SIZE = 500;
 const CX = SIZE / 2;
@@ -7,8 +7,6 @@ const CY = SIZE / 2;
 const RADIUS = 215;
 const INNER_RADIUS = 52;
 const TEXT_START_R = RADIUS - 10; // text anchor at outer rim
-const N = categories.length;
-const SECTOR_ANGLE = 360 / N;
 
 function polarToCartesian(cx, cy, r, angleDeg) {
   const rad = ((angleDeg - 90) * Math.PI) / 180;
@@ -38,7 +36,21 @@ function radialTextTransform(midAngle) {
   return `translate(${pos.x}, ${pos.y}) rotate(${midAngle + 90})`;
 }
 
-export default function SpinWheel({ onResult, isSpinning, setIsSpinning, effortFilter }) {
+export default function SpinWheel({ dishes, onResult, isSpinning, setIsSpinning, effortFilter }) {
+  const categories = useMemo(() => {
+    const seen = new Set();
+    const result = [];
+    for (const d of dishes) {
+      if (d.category && !seen.has(d.category)) {
+        seen.add(d.category);
+        result.push(d.category);
+      }
+    }
+    return result;
+  }, [dishes]);
+
+  const SECTOR_ANGLE = categories.length > 0 ? 360 / categories.length : 360;
+
   const [rotation, setRotation] = useState(0);
   const [spinning, setSpinning] = useState(false);
   const usedDishNames = useRef(new Set());
@@ -49,7 +61,7 @@ export default function SpinWheel({ onResult, isSpinning, setIsSpinning, effortF
   }, [effortFilter]);
 
   function spin() {
-    if (spinning) return;
+    if (spinning || dishes.length === 0) return;
 
     // Build eligible pool based on effort filter
     const eligible = effortFilter
@@ -98,8 +110,12 @@ export default function SpinWheel({ onResult, isSpinning, setIsSpinning, effortF
       <div className="wheel-frame">
         <svg
           viewBox={`0 0 ${SIZE} ${SIZE}`}
-          className="wheel-svg"
+          className={`wheel-svg${!spinning && dishes.length > 0 ? " wheel-svg--clickable" : ""}`}
           aria-label="Snurrhjul för middagsförslag"
+          onClick={spin}
+          role="button"
+          tabIndex={spinning || dishes.length === 0 ? -1 : 0}
+          onKeyDown={e => { if (e.key === "Enter" || e.key === " ") spin(); }}
         >
           {/* Decorative outer rings */}
           <circle cx={CX} cy={CY} r={RADIUS + 16} fill="#F0E8DC" stroke="#C4956A" strokeWidth="1.5" />
@@ -179,9 +195,9 @@ export default function SpinWheel({ onResult, isSpinning, setIsSpinning, effortF
       <button
         className={`spin-btn${spinning ? " spinning" : ""}`}
         onClick={spin}
-        disabled={spinning}
+        disabled={spinning || dishes.length === 0}
       >
-        {spinning ? "Snurrar…" : "Snurra hjulet"}
+        {spinning ? "Snurrar…" : dishes.length === 0 ? "Laddar…" : "Snurra hjulet"}
       </button>
     </div>
   );

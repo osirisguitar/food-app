@@ -1,81 +1,3 @@
-const dishes = [
-  { name: "Aprikosmarinerad kyckling med keso och spenat", category: "Kyckling",    effort: "Mellan", ingredients: "" },
-  { name: "Bacon- och mangosallad",                        category: "Sallad",      effort: "Mellan", ingredients: "Bacon, ruccola, mango, citron, cashewnötter, parmesan" },
-  { name: "Baconburgare",                                  category: "Sallad",      effort: "Mellan", ingredients: "Bacon, toast, cocktailtomater, gräddfil, dilldip, chips, gurka, basilika, senap" },
-  { name: "Bibimbap",                                      category: "Asiatiskt",   effort: "Hög",    ingredients: "" },
-  { name: "Boeuf Bourguignon",                             category: "Kött",        effort: "Hög",    ingredients: "" },
-  { name: "Bouillabaise",                                  category: "Soppa",       effort: "Hög",    ingredients: "" },
-  { name: "Bulgogi",                                       category: "Kött",        effort: "Hög",    ingredients: "" },
-  { name: "Ceasarsallad",                                  category: "Sallad",      effort: "Låg",    ingredients: "Romansallad, toast, kyckling, ceasardressing, parmesan" },
-  { name: "Chèvretoast",                                   category: "Sallad",      effort: "Låg",    ingredients: "Chèvre, ruccola, cocktailtomater, valnötter, honung, bröd" },
-  { name: "Chicken Tandoori",                              category: "Kyckling",    effort: "Mellan", ingredients: "" },
-  { name: "Chili con carne",                               category: "Kött",        effort: "Mellan", ingredients: "" },
-  { name: "Chiliköttbullar",                               category: "Kött",        effort: "Mellan", ingredients: "Köttfärs, skorpmjöl, tomatpuré, soja, ris" },
-  { name: "Chorizopasta",                                  category: "Pasta",       effort: "Mellan", ingredients: "" },
-  { name: "Fish and chips",                                category: "Halvfabrikat",effort: "Låg",    ingredients: "" },
-  { name: "Flygande Jakob",                                category: "Kyckling",    effort: "Mellan", ingredients: "" },
-  { name: "Friterad kyckling med gochujang",               category: "Kyckling",    effort: "Hög",    ingredients: "" },
-  { name: "Fryst pizza",                                   category: "Pizza",       effort: "Låg",    ingredients: "" },
-  { name: "Färsk pasta med bacon och paprika",             category: "Pasta",       effort: "Mellan", ingredients: "Pasta (färsk), bacon, lök, creme fraiche, paprika" },
-  { name: "Grekisk sallad",                                category: "Sallad",      effort: "Låg",    ingredients: "Isbergssallad, rödlök, oliver, fetaost" },
-  { name: "Grillpanna",                                    category: "Halvfabrikat",effort: "Låg",    ingredients: "" },
-  { name: "Hamburgare med pommes frites",                  category: "Kött",        effort: "Mellan", ingredients: "" },
-  { name: "Hemlagad pizza",                                category: "Pizza",       effort: "Hög",    ingredients: "Vetemjöl, jäst, ketchup, ost, tomatpuré, köttfärs" },
-  { name: "Jordärtskockssoppa",                            category: "Soppa",       effort: "Mellan", ingredients: "" },
-  { name: "Kall nudelsallad",                              category: "Sallad",      effort: "Mellan", ingredients: "" },
-  { name: "Kebab med bröd",                                category: "Kött",        effort: "Mellan", ingredients: "" },
-  { name: "Korv stroganoff",                               category: "Kött",        effort: "Mellan", ingredients: "" },
-  { name: "Korvsallad",                                    category: "Sallad",      effort: "Låg",    ingredients: "Cognacsmedvurst, soltorkade tomater, majs, kidneybönor, kruksallad, ruccola" },
-  { name: "Kräftsoppa med morötter",                       category: "Soppa",       effort: "Mellan", ingredients: "" },
-  { name: "Kyckling med curry och ris",                    category: "Kyckling",    effort: "Mellan", ingredients: "" },
-  { name: "Kyckling med jordnötssås",                      category: "Kyckling",    effort: "Mellan", ingredients: "" },
-  { name: "Kyckling med röd curry",                        category: "Kyckling",    effort: "Mellan", ingredients: "" },
-  { name: "Kålgryta",                                      category: "Kött",        effort: "Mellan", ingredients: "" },
-  { name: "Köttbullar med gräddsås",                       category: "Kött",        effort: "Hög",    ingredients: "Köttfärs, skorpmjöl, matlagningsgrädde, potatis" },
-  { name: "Köttbullar med parmesan och paprikasås",        category: "Kött",        effort: "Mellan", ingredients: "" },
-  { name: "Köttfärslimpa",                                 category: "Kött",        effort: "Mellan", ingredients: "" },
-  { name: "Lasagne",                                       category: "Pasta",       effort: "Mellan", ingredients: "Pasta (lasagneplattor), vetemjöl, köttfärs, lök, ost" },
-  { name: "Lasagnette",                                    category: "Pasta",       effort: "Mellan", ingredients: "" },
-  { name: "Lax i ugn",                                     category: "Fisk",        effort: "Mellan", ingredients: "" },
-  { name: "Lövbiff med ädelost och kroketter",             category: "Kött",        effort: "Mellan", ingredients: "" },
-  { name: "Makaronilåda",                                  category: "Pasta",       effort: "Mellan", ingredients: "" },
-  { name: "Marockansk kyckling med tranbär",               category: "Kyckling",    effort: "Mellan", ingredients: "Couscous" },
-  { name: "Marockansk kycklinggryta med aprikoser",        category: "Kyckling",    effort: "Mellan", ingredients: "Couscous" },
-  { name: "Morotssoppa",                                   category: "Soppa",       effort: "Mellan", ingredients: "Morötter, palsternackor" },
-  { name: "Paj med tomater och lök",                       category: "Vegetariskt", effort: "Mellan", ingredients: "" },
-  { name: "Pannbiff",                                      category: "Kött",        effort: "Mellan", ingredients: "" },
-  { name: "Pannkakor",                                     category: "Vegetariskt", effort: "Mellan", ingredients: "" },
-  { name: "Pasta med chorizo",                             category: "Pasta",       effort: "Mellan", ingredients: "" },
-  { name: "Pizzasmörgåsar",                                category: "Pizza",       effort: "Låg",    ingredients: "Toast, lök, ananas, ketchup, ost" },
-  { name: "Pokebowl",                                      category: "Kyckling",    effort: "Mellan", ingredients: "" },
-  { name: "Potatisbullar",                                 category: "Halvfabrikat",effort: "Låg",    ingredients: "" },
-  { name: "Quesadillas",                                   category: "Vegetariskt", effort: "Låg",    ingredients: "" },
-  { name: "Raggmunk",                                      category: "Vegetariskt", effort: "Mellan", ingredients: "" },
-  { name: "Ribs med pommes frites och cole slaw",          category: "Kött",        effort: "Låg",    ingredients: "" },
-  { name: "Risgrynsgröt",                                  category: "Vegetariskt", effort: "Mellan", ingredients: "Grötris, mjölk" },
-  { name: "Risotto",                                       category: "Vegetariskt", effort: "Hög",    ingredients: "" },
-  { name: "Rödbetssoppa",                                  category: "Soppa",       effort: "Mellan", ingredients: "Rödbetor, matlagningsgrädde" },
-  { name: "Schnitzel",                                     category: "Halvfabrikat",effort: "Låg",    ingredients: "" },
-  { name: "Snabbpizza",                                    category: "Pizza",       effort: "Låg",    ingredients: "Tortillabröd, ketchup, riven ost, skinka" },
-  { name: "Spaghetti Carbonara",                           category: "Pasta",       effort: "Mellan", ingredients: "" },
-  { name: "Spaghetti med köttfärssås",                     category: "Pasta",       effort: "Mellan", ingredients: "" },
-  { name: "Spaghetti med pesto",                           category: "Pasta",       effort: "Låg",    ingredients: "" },
-  { name: "Sushi",                                         category: "Fisk",        effort: "Hög",    ingredients: "Sushiris, lax, avokado, surimi, soya, wasabi" },
-  { name: "Tacogratäng",                                   category: "Kött",        effort: "Låg",    ingredients: "" },
-  { name: "Tacos",                                         category: "Kött",        effort: "Mellan", ingredients: "" },
-  { name: "Texas Chili",                                   category: "Långkok",     effort: "Hög",    ingredients: "" },
-  { name: "Thailändsk nudelsallad",                        category: "Asiatiskt",   effort: "Mellan", ingredients: "Risnudlar, kyckling, teriyaki, fisksås, sesamolja, sesamfrön, cocktailtomater, krispsallad" },
-  { name: "Torsk i ugn med bacon",                         category: "Fisk",        effort: "Mellan", ingredients: "Torskfilé, potatis, bacon, cocktailtomater" },
-  { name: "Tortellini",                                    category: "Pasta",       effort: "Låg",    ingredients: "Pasta (tortellini), parmesan, pesto" },
-  { name: "Tortillas (kyckling eller oumph)",              category: "Kyckling",    effort: "Mellan", ingredients: "" },
-  { name: "Ugnspannkaka",                                  category: "Vegetariskt", effort: "Mellan", ingredients: "" },
-  { name: "Ugnsstek med rostad potatis",                   category: "Kött",        effort: "Mellan", ingredients: "" },
-  { name: "Ugnsstekta rotfrukter",                         category: "Varm",        effort: "Mellan", ingredients: "Morötter, palsternackor, sötpotatis, rödbetor, rosmarin, honung" },
-  { name: "Västerbottensostpaj",                           category: "Vegetariskt", effort: "Mellan", ingredients: "" },
-  { name: "Wok med kyckling",                              category: "Varm",        effort: "Mellan", ingredients: "" },
-  { name: "Zucchinigratäng",                               category: "Kött",        effort: "Mellan", ingredients: "Zucchini, köttfärs" },
-];
-
 export const categoryColors = {
   Kyckling:    "#C27B42",
   Kött:        "#8B3A3A",
@@ -97,10 +19,45 @@ export const effortColors = {
   Hög:    "#8B3A3A",
 };
 
-export const categories = Object.keys(categoryColors);
+const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRWPlrQYogjuqAIWvBmN2FmqApdf1NWj5y_3WgUEJzMvoyZ7o1PftiBBGUt4vyKrBkbi1tEpMhOx68P/pub?gid=1296792460&single=true&output=csv";
 
-export function getDishesByCategory(category) {
-  return dishes.filter(d => d.category === category);
+function parseCSVLine(line) {
+  const values = [];
+  let current = "";
+  let inQuotes = false;
+  for (let i = 0; i < line.length; i++) {
+    if (line[i] === '"') {
+      inQuotes = !inQuotes;
+    } else if (line[i] === "," && !inQuotes) {
+      values.push(current.trim());
+      current = "";
+    } else {
+      current += line[i];
+    }
+  }
+  values.push(current.trim());
+  return values;
 }
 
-export default dishes;
+export async function fetchDishes() {
+  const res = await fetch(CSV_URL);
+  const text = await res.text();
+  const lines = text.trim().split("\n");
+  const headers = parseCSVLine(lines[0]);
+  const nameIdx = headers.indexOf("Maträtt");
+  const catIdx = headers.indexOf("Kategori");
+  const effortIdx = headers.indexOf("Arbetsinsats");
+  const ingIdx = headers.indexOf("Ingredienser");
+
+  return lines.slice(1)
+    .map(line => {
+      const vals = parseCSVLine(line);
+      return {
+        name: vals[nameIdx] || "",
+        category: (vals[catIdx] || "").trim(),
+        effort: (vals[effortIdx] || "").trim(),
+        ingredients: vals[ingIdx] || "",
+      };
+    })
+    .filter(d => d.name);
+}
